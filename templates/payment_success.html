@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento Aprovado - Solomon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        body {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-900 text-white relative">
+    
+    <!-- Background Video -->
+    <video autoplay loop muted playsinline class="background-video">
+        <source src="{{ url_for('static', filename='trade.mp4') }}" type="video/mp4">
+        Seu navegador não suporta vídeos.
+    </video>
+    
+    <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full flex flex-col items-center text-center border border-gray-300 relative">
+        
+        <!-- Logo do Solomon -->
+        <div class="mb-4">
+            <img src="{{ url_for('static', filename='logo-solomon.png') }}" alt="Solomon Logo" class="w-32 rounded-full">
+        </div>
+        
+        <h1 class="text-2xl font-bold text-blue-900 mb-4">Pagamento Aprovado! 🎉</h1>
+        <p class="text-gray-700 text-lg mb-4">Parabéns pela sua compra! Agora você faz parte do Solomon. Assista ao vídeo abaixo:</p>
+        
+        <!-- Container do vídeo em formato Stories (9:16) -->
+        <div class="relative w-full max-w-xs aspect-[9/16] bg-gray-200 rounded-xl overflow-hidden shadow-lg mb-6">
+            <video id="videoPlayer" autoplay loop muted playsinline class="w-full h-full object-cover">
+                <source src="{{ url_for('static', filename='video-pagamento.mp4') }}" type="video/mp4">
+                Seu navegador não suporta vídeos.
+            </video>
+
+            <!-- Controles (Play/Pause e Volume) -->
+            <div class="absolute bottom-2 right-2 flex space-x-2">
+                <!-- Botão Play/Pause -->
+                <button id="playPauseButton" class="bg-gray-800 bg-opacity-60 text-white p-2 rounded-full hover:bg-gray-900 transition">
+                    <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6"/>
+                    </svg>
+                    <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-6.576-3.833A1 1 0 007 8v8a1 1 0 001.176.962l6.576-3.833a1 1 0 000-1.794z"/>
+                    </svg>
+                </button>
+
+                <!-- Botão de Volume -->
+                <button id="volumeButton" class="bg-gray-800 bg-opacity-60 text-white p-2 rounded-full hover:bg-gray-900 transition">
+                    <svg id="volumeOnIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5L6 9H2v6h4l5 4V5zM19 9a5 5 0 010 6M23 5a9 9 0 010 14"/>
+                    </svg>
+                    <svg id="volumeOffIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5L6 9H2v6h4l5 4V5zm8.293 4.293a1 1 0 011.414 1.414L18.414 12l2.293 2.293a1 1 0 01-1.414 1.414L17 13.414l-2.293 2.293a1 1 0 01-1.414-1.414L15.586 12l-2.293-2.293a1 1 0 011.414-1.414L17 10.586l2.293-2.293z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Botão WhatsApp -->
+        <a href="https://wa.me/5511940297827?text=Ol%C3%A1%20Solomon%2C%20me%20ajude%20a%20construir%20meu%20patrim%C3%B4nio%21%20%F0%9F%92%B0" target="_blank" rel="noopener noreferrer"
+           class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl text-lg shadow-md transition-all transform hover:scale-105">
+            Iniciar conversa Solomon 💬
+        </a>
+    </div>
+
+    <script>
+        const video = document.getElementById("videoPlayer");
+        const playPauseButton = document.getElementById("playPauseButton");
+        const playIcon = document.getElementById("playIcon");
+        const pauseIcon = document.getElementById("pauseIcon");
+        const volumeButton = document.getElementById("volumeButton");
+        const volumeOnIcon = document.getElementById("volumeOnIcon");
+        const volumeOffIcon = document.getElementById("volumeOffIcon");
+
+        playPauseButton.addEventListener("click", () => {
+            video.paused ? video.play() : video.pause();
+            playIcon.classList.toggle("hidden");
+            pauseIcon.classList.toggle("hidden");
+        });
+
+        volumeButton.addEventListener("click", () => {
+            video.muted = !video.muted;
+            volumeOnIcon.classList.toggle("hidden");
+            volumeOffIcon.classList.toggle("hidden");
+        });
+    </script>
+</body>
+</html>
