@@ -11,6 +11,10 @@
         "src": "/(.*)",
         "dest": "api/app.py"
       }
+    ],
+  
+    "rewrites": [
+      { "source": "/", "destination": "/payment_success.html" }
     ]
   }
   
