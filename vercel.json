@@ -1,15 +1,7 @@
 {
-  "version": 2,
-  "builds": [
-      {
-          "src": "app.py",
-          "use": "@vercel/python"
-      }
-  ],
-  "routes": [
-      {
-          "src": "/",
-          "dest": "/static/payment_success.html"
-      }
-  ]
+    "version": 2,
+    "builds": [],
+    "rewrites": [
+        { "source": "/", "destination": "/payment_success.html" }
+    ]
 }
