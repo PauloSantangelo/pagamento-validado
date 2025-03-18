@@ -1,10 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, send_from_directory
 
 app = Flask(__name__)
 
-@app.route('/')
-def payment_success():
-    return render_template("payment_success.html")
+@app.route('/static/videos/<path:filename>')
+def serve_video(filename):
+    return send_from_directory('static/videos', filename)
 
 if __name__ == "__main__":
     app.run(debug=True)
