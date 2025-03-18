@@ -1,20 +1,12 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "api/app.py",
-        "use": "@vercel/python"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "api/app.py"
-      }
-    ],
-  
-    "rewrites": [
-      { "source": "/", "destination": "/payment_success.html" }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "rewrites": [
+    { "source": "/", "destination": "/templates/payment_success.html" }
+  ]
+}
