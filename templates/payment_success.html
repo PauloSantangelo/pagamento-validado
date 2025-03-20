@@ -83,6 +83,19 @@
                     gsap.to(button, { scale: 1, boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", duration: 0.3 });
                 });
             });
+
+            // Faz requisição para verificar o status do pagamento no webhook
+            fetch("https://seu-servidor.com/webhook", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.redirect_url) {
+                    window.location.href = data.redirect_url; // Redireciona o usuário
+                }
+            })
+            .catch(error => console.error("Erro no webhook:", error));
         });
     </script>
 </body>
