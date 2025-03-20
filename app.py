@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, jsonify, redirect
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__, template_folder=os.path.abspath("templates"))
 
@@ -12,14 +12,15 @@ def asaas_webhook():
     data = request.json  # Captura os dados recebidos do Asaas
 
     # Verifica se o pagamento foi confirmado
-    if data.get("event") == "PAYMENT_CONFIRMED":
+    if data and data.get("event") == "PAYMENT_CONFIRMED":
         payment_id = data.get("payment", {}).get("id")  # Captura o ID do pagamento
-        print(f"Pagamento confirmado: {payment_id}")
+        print(f"✅ Pagamento confirmado: {payment_id}")  # Log para depuração
 
-        # Redireciona para a página de pagamento validado
-        return redirect("https://pagamento-validado-paulo-santangelos-projects.vercel.app/")
+        # Retorna sucesso para o Asaas
+        return jsonify({"status": "success", "message": "Pagamento confirmado"}), 200
 
-    return jsonify({"status": "ignored"}), 200
+    # Se não for um evento de pagamento confirmado, apenas ignora
+    return jsonify({"status": "ignored", "message": "Evento não tratado"}), 200
 
 if __name__ == "__main__":
     app.run(debug=True)
